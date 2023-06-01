@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>DMZ_website</title>
+  <style>
+    .output-box {
+      width: 200px;
+      height: 100px;
+      border: 1px solid black;
+      padding: 10px;
+      font-size: 16px;
+      overflow: auto;
+
+      /* 가로 중앙 정렬 */
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+
+    }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="실행 페이지">
+  <meta name="keywords" content="key１,key２,key３,key４,key５">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/openclose.js"></script>
+  <script src="js/fixmenu_pagetop.js"></script>
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+
+<!--実験-->
+
+
+
+
+<body>
+
+  <div id="container">
+
+    <header>
+      <h1 id="logo"><a href="main.html"><img src="images/design.gif" alt="DMZ_website"></a></h1>
+    </header>
+
+    <!--개폐 메뉴-->
+    <nav id="menubar">
+      <ul>
+        <li><a href="main.html" style="font-size: 40px;">표지</a></li>
+        <li><a href="instructions.html" style="font-size: 40px;">사용법</a></li>
+        <li><a href="Program_Introduction.html" style="font-size: 40px;">프로그램 소개</a></li>
+        <li><a href="execution.html" style="font-size: 40px;">실행</a></li>
+      </ul>
+    </nav>
+
+    <div id="contents">
+
+      <section>
+
+        <h2>EXECUTION<br><span>실행</span></h2>
+
+
+
+        <!--===================================================-->
+
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+          <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+          <style>
+            .container {
+              margin: 50px;
+            }
+
+            #imagePreview {
+              max-width: 100%;
+              max-height: 300px;
+              margin-top: 20px;
+            }
+          </style>
+        </head>
+
+        <body>
+          <div class="container">
+
+            <!-- <form onsubmit="submitForm(event)" enctype="multipart/form-data"> -->
+            <div class="form-group">
+              <div class="output-box" id="myBox">
+                HELLO WORLD!
+              </div>
+              <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
+              <label for="inputText">Input text</label>
+              <input type="text" class="form-control" id="inputText" placeholder="Input text">
+            </div>
+            <div class="form-group">
+              <label for="inputFile">File input</label>
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="inputFile">
+                  <label class="custom-file-label" for="inputFile" data-browse="참조">파일 선택(드롭 가능)</label>
+                </div>
+                <div class="input-group-append">
+                  <button type="button" class="btn btn-outline-secondary input-group-text"
+                    id="inputFileReset">취소</button>
+                </div>
+              </div>
+            </div>
+            <hr />
+            <div id="dataList"></div>
+            <hr />
+            <div id="imagePreview"></div>
+            <button type="button" id='make_json' class="btn btn-primary">Submit</button>
+            <!-- </form> -->
+          </div>
+
+          <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+          <script>
+
+            bsCustomFileInput.init();
+
+            document.getElementById('make_json').onclick = function () {
+              const usr_input = document.getElementById("inputText").value;
+
+              usr_input_list = usr_input.split(" ");
+
+              const test_data = JSON.stringify({
+                cloth: usr_input_list[0],
+                color: usr_input_list[1],
+                country: usr_input_list[2],
+                mol: usr_input_list[3],
+                season: usr_input_list[4],
+                sex: usr_input_list[5]
+              })
+
+              alert(typeof test_data);
+
+              fetch("http://localhost:8000/api/data", {
+                method: 'POST',
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                  cloth: usr_input_list[0],
+                  color: usr_input_list[1],
+                  country: usr_input_list[2],
+                  mol: usr_input_list[3],
+                  season: usr_input_list[4],
+                  sex: usr_input_list[5]
+                })
+              }).then((response) => response.json())
+                .then(jsonData => {
+
+                  const address = jsonData["address"];
+                  const resultElement = document.getElementById('myBox');
+                  resultElement.innerText = address;
+                });
+            };
+
+            document.getElementById('inputFileReset').addEventListener('click', function () {
+              bsCustomFileInput.destroy();
+              var elem = document.getElementById('inputFile');
+              elem.value = '';
+              var clone = elem.cloneNode(false);
+              elem.parentNode.replaceChild(clone, elem);
+              bsCustomFileInput.init();
+              document.getElementById('imagePreview').innerHTML = '';
+            });
+
+            function submitForm(event) {
+              event.preventDefault(); // フォームのデフォルトの送信動作をキャンセルする
+
+              var formData = new FormData(); // フォームデータを作成
+
+              // テキスト入力の値を取得してフォームデータに追加
+              var inputText = document.getElementById('inputText').value;
+              formData.append('text', inputText);
+
+              // 選択されたファイルを取得してフォームデータに追加
+              var inputFile = document.getElementById('inputFile').files[0];
+              formData.append('file', inputFile);
+
+              // フォームデータをサーバーに送信する処理を実装する（サーバーサイドの処理に依存）
+
+              // 保存されたデータをリスト形式で表示する処理
+              var dataList = document.getElementById('dataList');
+              var listItem = document.createElement('li');
+              listItem.textContent = 'Text: ' + inputText + ', File: ' + inputFile.name;
+              dataList.appendChild(listItem);
+
+              // 画像を枠内に表示する処理
+              var imagePreview = document.getElementById('imagePreview');
+              var img = document.createElement('img');
+              img.src = URL.createObjectURL(inputFile);
+              img.classList.add('img-fluid');
+              imagePreview.innerHTML = ''; // 以前のプレビューを削除
+              imagePreview.appendChild(img);
+            }
+          </script>
+
+      </section>
+
+    </div>
+    <!--/#contents-->
+
+    <footer>
+      <ul class="icon">
+        <li><a href="#"><img src="images/icon_facebook.png" alt="Facebook"></a></li>
+        <li><a href="#"><img src="images/icon_twitter.png" alt="Twitter"></a></li>
+        <li><a href="#"><img src="images/icon_instagram.png" alt="Instagram"></a></li>
+        <li><a href="#"><img src="images/icon_youtube.png" alt="TouTube"></a></li>
+      </ul>
+      <small>Copyright&copy; <a href="index.html">Sample Gallery</a> All Rights Reserved.</small>
+      <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
+    </footer>
+
+  </div>
+  <!--/#container-->
+
+  <p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
+
+  <!--메뉴 개폐 버튼-->
+  <div id="menubar_hdr" class="close"></div>
+
+  <!--메뉴 개폐 처리-->
+  <script>
+    open_close("menubar_hdr", "menubar");
+  </script>
+
+  <!--lightbox용js파일 가져오기-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/js/lightbox-plus-jquery.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>DMZ_website</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="사용법">
+  <meta name="keywords" content="key１,key２,key３,key４,key５">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/openclose.js"></script>
+  <script src="js/fixmenu_pagetop.js"></script>
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body>
+
+  <div id="root">
+
+    <header>
+      <h1 id="logo"><a href="main.html"><img src="images/design.gif" alt="DMZ_website"></a></h1>
+    </header>
+
+    <!--개폐 메뉴-->
+    <nav id="menubar">
+      <ul>
+        <li><a href="main.html" style="font-size: 40px;">표지</a></li>
+        <li><a href="instructions.html" style="font-size: 40px;">사용법</a></li>
+        <li><a href="Program_Introduction.html" style="font-size: 40px;">프로그램 소개</a></li>
+        <li><a href="execution.html" style="font-size: 40px;">실행</a></li>
+      </ul>
+    </nav>
+
+    <div id="contents">
+
+
+      <section>
+
+        <h2>INSTRUCTION<br><span>사용법</span></h2>
+
+        <h1>파일을 선택하고나 드롭하시고 Submit를 누르시면 됩니다.</h1>
+
+      </section>
+
+
+    </div>
+    <!--/#contents-->
+
+    <footer>
+      <ul class="icon">
+        <li><a href="#"><img src="images/icon_facebook.png" alt="Facebook"></a></li>
+        <li><a href="#"><img src="images/icon_twitter.png" alt="Twitter"></a></li>
+        <li><a href="#"><img src="images/icon_instagram.png" alt="Instagram"></a></li>
+        <li><a href="#"><img src="images/icon_youtube.png" alt="TouTube"></a></li>
+      </ul>
+      <small>Copyright&copy; <a href="index.html">Sample Gallery</a> All Rights Reserved.</small>
+      <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
+    </footer>
+
+  </div>
+  <!--/#container-->
+
+  <p class="nav-fix-pos-pagetop"><a href="#">↑</a></p>
+
+  <!--메뉴 개폐 버튼-->
+  <div id="menubar_hdr" class="close"></div>
+
+  <!--메뉴 개폐 처리-->
+  <script>
+    open_close("menubar_hdr", "menubar");
+  </script>
+
+  <!--lightbox용js파일 가져오기-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/js/lightbox-plus-jquery.min.js"></script>
+
+</body>
+
+</html>
