@@ -1,0 +1,12 @@
+names:
+- dress
+- jacket
+- jean
+- pants
+- polar
+- shirt
+- short
+- skirt
+nc: 8
+train: /content/drive/MyDrive/dmz_teamproject/dataset/detection_data.v4i.yolov5pytorch/train/images
+val: /content/drive/MyDrive/dmz_teamproject/dataset/detection_data.v4i.yolov5pytorch/test/images

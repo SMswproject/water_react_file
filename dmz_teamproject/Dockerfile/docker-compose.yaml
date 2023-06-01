@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  my_mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: mypassword
+      MYSQL_DATABASE: app
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: pass
+    ports:
+      - 43306:3306
+    volumes:
+      - ./mysql-data:/var/lib/mysql
