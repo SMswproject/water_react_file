@@ -1,28 +1,23 @@
-from flask import Flask , request , jsonify
+from flask import Flask , jsonify ,request ,  json
 from recommender_algorithm import run
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
-@app.route("http://10.20.101.180:3000/api/endpoint" , methods = ['POST'])
+@app.route("/api/data" , methods = ['POST'])
 def process_json():
     data = request.get_json()
 
-    #sentence = ' '.join([data['cloth'] , data['color'] , data['country'] , data['mol'] , data['season'] , data['sex']])
+    sentence = ' '.join([data['cloth'] , data['color'] , data['country'] , data['mol'] , data['season'] , data['sex']])
 
-    #result = run(sentence)
+    result = run(sentence)
 
-    #response = {
-    #    "address" : result
-    #}
-
-    #return jsonify(response)
-
-    test = {
-        "address" : "안녕"
+    response = {
+        'address' : result
     }
 
-    return jsonify(test)
-
+    return response
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host = 'localhost' , port=5000 , debug=True)

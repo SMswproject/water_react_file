@@ -11,15 +11,17 @@ function call(data)
         sex : usr_input_list[5]
     })
 
-    fetch("http://10.20.101.180:3000/api/endpoint" , {
-        method : 'POST' ,
-        headers : {
-            'Content-Type' : 'application/json'
-        } ,
-        body : test_data
-    }).then((response) => response.json())
-    .then(jsonData => {
-        const address = jsonData["address"];
-        return address;
-    });
+    alert(test_data);
+
+    //fetch("http://localhost:3000/api/endpoint" , {
+    //    method : 'POST' ,
+    //    headers : {
+    //        'Content-Type' : 'application/json'
+    //    } ,
+    //   body : test_data
+    //}).then((response) => response.json())
+    //.then(jsonData => {
+    //    const address = jsonData["address"];
+    //    return address;
+    //});
 }
