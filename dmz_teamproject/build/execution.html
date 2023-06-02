@@ -122,46 +122,14 @@
           </div>
 
           <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+          <script src="sendForm.js"></script>
           <script>
-
             bsCustomFileInput.init();
-
             document.getElementById('make_json').onclick = function () {
               const usr_input = document.getElementById("inputText").value;
-
-              usr_input_list = usr_input.split(" ");
-
-              const test_data = JSON.stringify({
-                cloth: usr_input_list[0],
-                color: usr_input_list[1],
-                country: usr_input_list[2],
-                mol: usr_input_list[3],
-                season: usr_input_list[4],
-                sex: usr_input_list[5]
-              })
-
-              alert(typeof test_data);
-
-              fetch("http://localhost:8000/api/data", {
-                method: 'POST',
-                headers: {
-                  "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                  cloth: usr_input_list[0],
-                  color: usr_input_list[1],
-                  country: usr_input_list[2],
-                  mol: usr_input_list[3],
-                  season: usr_input_list[4],
-                  sex: usr_input_list[5]
-                })
-              }).then((response) => response.json())
-                .then(jsonData => {
-
-                  const address = jsonData["address"];
-                  const resultElement = document.getElementById('myBox');
-                  resultElement.innerText = address;
-                });
+              const address = call(usr_input);
+              const resultElement = document.getElementById("myBox");
+              resultElement = address;
             };
 
             document.getElementById('inputFileReset').addEventListener('click', function () {

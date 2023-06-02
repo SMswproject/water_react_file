@@ -3,7 +3,7 @@ from recommender_algorithm import run
 
 app = Flask(__name__)
 
-@app.route("/api/data" , methods = ['POST'])
+@app.route("http://10.20.101.180:3000/api/endpoint" , methods = ['POST'])
 def process_json():
     data = request.get_json()
 
@@ -25,4 +25,4 @@ def process_json():
 
 
 if __name__ == '__main__':
-    app.run(host = 'localhost' , port = 8000 , debug = True)
+    app.run()
