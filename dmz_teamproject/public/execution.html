@@ -153,9 +153,7 @@
                   body : test_data
               }).then(response => response.json())
               .then(jsonData => {
-                  //const address = jsonData.cloth;
-                  //console.log(address);
-                  const result = jsonData.cloth;
+                  const result = jsonData.address;
                   const resultElement = document.getElementById("myBox");
                   resultElement.innerText = result;
               })  
