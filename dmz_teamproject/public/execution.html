@@ -90,9 +90,7 @@
 
             <!-- <form onsubmit="submitForm(event)" enctype="multipart/form-data"> -->
             <div class="form-group">
-              <div class="output-box" id="myBox">
-                HELLO WORLD!
-              </div>
+              <div class="output-box" id="myBox"></div>
               <br></br>
               <br></br>
               <br></br>
@@ -118,6 +116,7 @@
             <hr />
             <div id="imagePreview"></div>
             <button type="button" id='make_json' class="btn btn-primary">Submit</button>
+            <button type="button" id="reset_picture" class="btn btn-primary">Reset</button>
             <!-- </form> -->
           </div>
 
@@ -129,8 +128,6 @@
 
             document.getElementById('make_json').onclick = function () {
               const usr_input = document.getElementById("inputText").value;
-              //const address = call(usr_input);
-              //console.log(address);
 
               usr_input_list = usr_input.split(" ");
               
@@ -143,8 +140,6 @@
                   sex : usr_input_list[5]
               })
 
-              console.log(typeof test_data);
-
               fetch("http://localhost:5000/api/data" , {
                   method : 'POST' ,
                   headers : {
@@ -155,8 +150,17 @@
               .then(jsonData => {
                   const result = jsonData.address;
                   const resultElement = document.getElementById("myBox");
-                  resultElement.innerText = result;
+                  
+                  const imgElement = document.createElement("img");
+                  imgElement.src = result;
+
+                  resultElement.appendChild(imgElement);
               })  
+            };
+
+            document.getElementById('reset_picture').onclick = function() {
+                const resetElement = document.getElementById("myBox");
+                resetElement.innerHTML = "";
             };
 
             document.getElementById('inputFileReset').addEventListener('click', function () {
