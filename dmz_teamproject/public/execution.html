@@ -6,11 +6,54 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>DMZ_website</title>
   <style>
+    .hidden{
+      display: none;
+    }
     body {min-height: 100vh;}
+    #logo_box{
+      width: 300px;
+      height: 100px;
+      border: 3px solid black;
+      padding: 10px;
+      font-size: 16px;
+      overflow: auto;
+      margin-top: 70px;
+
+      position: absolute;
+      left: 75%;
+      transform: translateX(-50%);
+
+      transition: transform 0.3 ease;
+
+      border-radius: 60px 60px 60px 60px;
+
+      background-color: white;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    }
+    #desc_box{
+      width: 400px;
+      height: 300px;
+      border: 3px solid black;
+      padding: 10px;
+      font-size: 16px;
+      overflow: auto;
+      margin-top: 200px;
+
+      position: absolute;
+      left: 75%;
+      transform: translateX(-50%);
+
+      transition: transform 0.3 ease;
+
+      border-radius: 60px 60px 60px 60px;
+
+      background-color: white;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    }
     .output-box {
       width: 500px;
       height: 550px;
-      border: 1px solid black;
+      border: 3px solid black;
       padding: 10px;
       font-size: 16px;
       overflow: auto;
@@ -21,6 +64,11 @@
       transform: translateX(-50%);
 
       transition : transform 0.3s ease;
+
+      border-radius: 60px 60px 60px 60px;
+
+      background-color: white;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     }
 
     .output-box:hover{
@@ -101,9 +149,10 @@
             <!-- <form onsubmit="submitForm(event)" enctype="multipart/form-data"> -->
             <div class="form-group">
               <div class="output-box" id="myBox" onmouseenter="call_describe()" onmouseleave="call_erase()"></div>
-                <p id="hidden_head"></p>
-                <p id="hidden_text"></p>
-                <p id="url"></p>
+              <div class="hidden" id="logo_box" style="text-align: center; padding-left: 20px;"></div>
+              <div class="hidden" id="desc_box" style="text-align: center; padding-left: 20px;"></div>  
+              <br></br>
+              <br></br>
               <br></br>
               <br></br>
               <br></br>
@@ -188,6 +237,10 @@
                   
                   const imgElement = document.createElement("img");
                   imgElement.src = result;
+
+                  imgElement.style.width='100%';
+                  imgElement.style.height='100%'
+                  imgElement.style.objectFit='cover';
 
                   resultElement.appendChild(imgElement);
               })  
