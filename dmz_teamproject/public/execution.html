@@ -6,9 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>DMZ_website</title>
   <style>
+    body {min-height: 100vh;}
     .output-box {
-      width: 200px;
-      height: 100px;
+      width: 500px;
+      height: 550px;
       border: 1px solid black;
       padding: 10px;
       font-size: 16px;
@@ -19,6 +20,15 @@
       left: 50%;
       transform: translateX(-50%);
 
+      transition : transform 0.3s ease;
+    }
+
+    .output-box:hover{
+      transform: translate(-500px , 0);
+    }
+
+    .ouput-box:hover ~ .output-box{
+      transform: none;
     }
   </style>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -90,7 +100,17 @@
 
             <!-- <form onsubmit="submitForm(event)" enctype="multipart/form-data"> -->
             <div class="form-group">
-              <div class="output-box" id="myBox"></div>
+              <div class="output-box" id="myBox" onmouseenter="call_describe()" onmouseleave="call_erase()"></div>
+                <p id="hidden_head"></p>
+                <p id="hidden_text"></p>
+                <p id="url"></p>
+              <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
               <br></br>
               <br></br>
               <br></br>
@@ -121,10 +141,22 @@
           </div>
 
           <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
-          <script src="sendForm.js"></script>
+          <script src="describe.js"></script>
           <script>
 
             bsCustomFileInput.init();
+
+            var mol_info = "";
+
+            function call_describe()
+            {
+              describe(mol_info);
+            }
+            
+            function call_erase()
+            {
+              erase();
+            }
 
             document.getElementById('make_json').onclick = function () {
               const usr_input = document.getElementById("inputText").value;
@@ -139,6 +171,9 @@
                   season : usr_input_list[4] ,
                   sex : usr_input_list[5]
               })
+
+              mol_info = usr_input_list[3];
+              console.log(mol_info);
 
               fetch("http://localhost:5000/api/data" , {
                   method : 'POST' ,
