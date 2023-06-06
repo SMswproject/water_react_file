@@ -40,7 +40,6 @@ def free_extranct(string):
         result = random.randrange(0 , 2) # 없을 경우에는 랜덤을 사용한다.
         set_index.append(result)
     else:
-        print(result)
         set_index.append(result)
     
     result = -1
@@ -56,7 +55,6 @@ def free_extranct(string):
         result = random.randrange(0 , 7)
         set_index.append(result)
     else:
-        print(result)
         set_index.append(result)
 
     result = -1
@@ -72,10 +70,23 @@ def free_extranct(string):
         result = random.randrange(0 , 4)
         set_index.append(result)
     else:
-        print(result)
         set_index.append(result)
     
     return set_index
+
+def mol_change(num):
+    mol_data = {
+        "LOTTE_ON" : 0 ,
+        "Look_pin" : 1 ,
+        "RAKUTEN" : 2 ,
+        "UNIQLO" : 3 ,
+        "mushinsa" : 4
+    }
+
+    for name in mol_data.keys():
+
+        if num == mol_data[name]:
+            return name
 
 def run_free(string):
     
@@ -84,5 +95,6 @@ def run_free(string):
     df = get_data('SELECT * FROM picture')
 
     random_row = df[(df['sex'] == set_index[0]) & (df['cloth'] == set_index[1]) & (df['season'] == set_index[2])].sample(n = 1)
-
-    return random_row['address']
+    name = mol_change(random_row[['address' , 'mol']]['mol'].values[0])
+    
+    return (random_row['address'] , name)

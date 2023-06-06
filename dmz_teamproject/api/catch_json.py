@@ -27,9 +27,13 @@ def free_mode():
     string = data['string']
 
     result = run_free(string)
+    
+    address = result[0].values[0]
+    name = result[1]
 
     response = {
-        'address' : result
+        'address' : address ,
+        'name' : name
     }
 
     return jsonify(response)
