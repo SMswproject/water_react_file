@@ -1,5 +1,6 @@
 from flask import Flask , jsonify ,request ,  json
 from recommender_algorithm import run
+from free_mod import run_free
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -12,6 +13,20 @@ def process_json():
     sentence = ' '.join([data['cloth'] , data['color'] , data['country'] , data['mol'] , data['season'] , data['sex']])
 
     result = run(sentence)
+
+    response = {
+        'address' : result
+    }
+
+    return jsonify(response)
+
+@app.route("/api/endpoint" , methods = ['POST'])
+def free_mode():
+    data = request.get_json()
+
+    string = data['string']
+
+    result = run_free(string)
 
     response = {
         'address' : result
