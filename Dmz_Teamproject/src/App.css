@@ -1,0 +1,27 @@
+body {
+    font-family: Georgia, serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .App {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .App-header {
+    font-size: large;
+    font-weight: bold;
+  }
+  
+  .App-body {
+    text-align: center;
+  }
+  
+  .App-footer {
+    margin-top: 10px;
+    text-align: center;
+  }
+  
